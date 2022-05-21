@@ -1,65 +1,8 @@
 import { useState, useEffect } from "react";
-const TYPES = ["草", "树", "村", "田", "铁", "河", "湖", "空"];
-const TYPE_REG_STRS = {
-  草: "[草空湖]",
-  树: "[树空]",
-  村: "[村空]",
-  田: "[田空]",
-  铁: "[铁空]",
-  河: "[河空湖]",
-  湖: "[湖空草河]",
-};
-const PIECE_LENGTH = 6;
-const PieceInput = ({
-  title = "",
-  defaultPiece = "",
-  onFinish = () => null,
-  hasNull = true,
-}) => {
-  const [piece, setPiece] = useState(defaultPiece);
-  const deleteLast = () => {
-    setPiece(piece.slice(0, -1));
-  };
-  const finish = () => {
-    if (!piece) return;
-    if (piece.length === PIECE_LENGTH) {
-      onFinish(piece);
-    } else {
-      // 补上空到6位
-      onFinish(piece + "空".repeat(PIECE_LENGTH - piece.length));
-    }
-    reset();
-  };
-  const reset = () => {
-    setPiece(defaultPiece);
-  };
-  return (
-    <>
-      <p>{title}</p>
-      <div className="flex flex-wrap">
-        {TYPES.map((type) => {
-          if (!hasNull && type === "空") return null;
-          return (
-            <button
-              className=""
-              key={type}
-              onClick={() => setPiece(piece + type)}
-              disabled={piece.length >= PIECE_LENGTH}
-            >
-              {type}
-            </button>
-          );
-        })}
-      </div>
-      <p>
-        {JSON.stringify(piece)} <button onClick={deleteLast}>移除</button>
-      </p>
-      <p>
-        <button onClick={finish}>完成</button>
-      </p>
-    </>
-  );
-};
+import PieceCard from "./PieceCard";
+import PieceInput from "./PieceInput";
+import { TYPE_REG_STRS } from "../constants";
+
 const Tool = () => {
   const [pieces, setPieces] = useState(
     localStorage.getItem("pieces")
@@ -70,7 +13,8 @@ const Tool = () => {
   const addPiece = (piece) => {
     setPieces([...pieces, piece]);
   };
-  const removePiece = (index) => {
+  const removePiece = (piece) => {
+    const index = pieces.indexOf(piece);
     setPieces(pieces.filter((_, i) => i !== index));
   };
 
@@ -90,33 +34,63 @@ const Tool = () => {
     localStorage.setItem("pieces", JSON.stringify(pieces));
   }, [pieces]);
   return (
-    <>
-      <PieceInput title="输入当前需求地块" onFinish={addPiece} />
-      <p>需求地块:</p>
-      {pieces.map((p, index) => (
-        <p key={p + index}>{p}</p>
-      ))}
-      <PieceInput
-        title="输入需要搜索地块"
-        onFinish={setPiece}
-        hasNull={false}
-      />
-      {piece && (
-        <>
-          <p>
-            <b>{piece}</b>的匹配结果
-          </p>
-          {pieces
-            .filter((p) => comparePiece(p, piece))
-            .map((p, index) => (
-              <p key={p + index}>
-                <b>{p}</b>
-                <button onClick={() => removePiece(index)}>匹配到</button>
-              </p>
-            ))}
-        </>
-      )}
-    </>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 absolute inset-0 h-screen w-screen p-2 bg-blue-grey-100">
+      <div className="col-span-1 flex flex-col h-full overflow-hidden rounded-lg bg-blue-grey-200 p-2">
+        <p className="text-lg font-sans font-semibold text-blue-grey-800">
+          输入当前需求地块
+        </p>
+        <PieceInput
+          onFinish={addPiece}
+          className="bg-blue-grey-300 p-2 rounded-md"
+          buttonClassName="bg-blue-grey-200 text-blue-grey-800"
+        />
+        <p className="text-lg font-sans font-semibold text-blue-grey-800">
+          需求地块
+        </p>
+        <div className="flex-auto w-full flex flex-wrap content-start justify-center overflow-auto bg-blue-grey-300 p-2 rounded-md">
+          {pieces.map((p, index) => (
+            <PieceCard
+              className="bg-blue-grey-200 m-1"
+              key={p + index}
+              piece={p}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="col-span-1 flex flex-col h-full overflow-hidden rounded-lg bg-blue-grey-200 p-2">
+        <p className="text-lg font-sans font-semibold text-blue-grey-800">
+          输入匹配地块
+        </p>
+        <PieceInput
+          onFinish={setPiece}
+          hasNull={false}
+          className="bg-blue-grey-300 p-2 rounded-md"
+          buttonClassName="bg-blue-grey-200 text-blue-grey-800"
+        />
+        <p className="text-lg font-sans font-semibold text-blue-grey-800">
+          匹配地块
+        </p>
+        <div className="h-36 bg-blue-grey-300 p-2 rounded-md">
+          <PieceCard piece={piece} />
+        </div>
+        <p className="text-lg font-sans font-semibold text-blue-grey-800">
+          匹配结果
+        </p>
+        <div className="flex-auto w-full flex flex-wrap content-start justify-center overflow-auto bg-blue-grey-300 p-2 rounded-md">
+          {piece &&
+            pieces
+              .filter((p) => comparePiece(p, piece))
+              .map((p, index) => (
+                <PieceCard
+                  className="bg-blue-grey-200 m-1"
+                  key={p + index}
+                  piece={p}
+                  onRemove={removePiece}
+                />
+              ))}
+        </div>
+      </div>
+    </div>
   );
 };
 export default Tool;

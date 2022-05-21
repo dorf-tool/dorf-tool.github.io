@@ -1,4 +1,4 @@
-import Tool from "./components/tool";
+import Tool from "./components/Tool";
 function App() {
   return <Tool />
 }
