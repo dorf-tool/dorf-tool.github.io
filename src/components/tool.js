@@ -92,10 +92,10 @@ const Tool = () => {
   return (
     <>
       <PieceInput title="输入当前需求地块" onFinish={addPiece} />
+      <p>需求地块:</p>
       {pieces.map((p, index) => (
         <p key={p + index}>{p}</p>
       ))}
-      <p>需求地块:</p>
       <PieceInput
         title="输入需要搜索地块"
         onFinish={setPiece}
