@@ -17,6 +17,7 @@ const TYPE_REG_STRS = {
   铁: "[铁空]",
   河: "[河空湖]",
   湖: "[湖空草河]",
+  空: "[草树村田铁河湖空]",
 };
 const PIECE_LENGTH = 6;
 

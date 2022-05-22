@@ -7,7 +7,6 @@ const PieceInput = ({
   buttonClassName = "",
   defaultPiece = "",
   onFinish = () => null,
-  hasNull = true,
 }) => {
   const [piece, setPiece] = useState(defaultPiece);
   const deleteLast = () => {
@@ -30,7 +29,6 @@ const PieceInput = ({
     <div className={classNames(className, "h-36 grid grid-cols-6 gap-2")}>
       <div className="col-span-3 grid grid-cols-4 gap-2">
         {TYPES.map((type) => {
-          if (!hasNull && type === "空") return null;
           return (
             <button
               className={classNames(buttonClassName, "col-span-1 rounded")}
