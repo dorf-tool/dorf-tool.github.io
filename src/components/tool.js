@@ -27,7 +27,10 @@ const Tool = () => {
       setPieces([]);
     }
   };
-
+  const moveToPieces = () => {
+    setPieces([...pieces, piece]);
+    setPiece("");
+  };
   const comparePiece = (a, b) => {
     // a循环拼接翻倍
     const aStr = a + a;
@@ -68,7 +71,8 @@ const Tool = () => {
           {pieces.map((p, index) => (
             <PieceCard
               className={classNames(
-                piece&&pieces.filter((p) => comparePiece(p, piece)).includes(p) &&
+                piece &&
+                  pieces.filter((p) => comparePiece(p, piece)).includes(p) &&
                   "border-2 border-red-500 border-solid",
                 "bg-blue-grey-200 m-1"
               )}
@@ -92,8 +96,16 @@ const Tool = () => {
         <p className="text-lg font-sans font-semibold text-blue-grey-800">
           匹配地块
         </p>
-        <div className="h-36 bg-blue-grey-300 p-2 rounded-md">
+        <div className="h-36 bg-blue-grey-300 p-2 rounded-md flex justify-around items-center">
           <PieceCard className="bg-blue-grey-200" piece={piece} />
+          {piece && (
+            <button
+              className="h-content bg-blue-grey-200 text-blue-grey-800 col-span-1 rounded p-2"
+              onClick={moveToPieces}
+            >
+              添加到需求
+            </button>
+          )}
         </div>
         <p className="text-lg font-sans font-semibold text-blue-grey-800">
           匹配结果
