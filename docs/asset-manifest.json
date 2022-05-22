@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/dorf-tool/static/css/main.c334655f.css",
-    "main.js": "/dorf-tool/static/js/main.18e8c876.js",
+    "main.js": "/dorf-tool/static/js/main.9a69a436.js",
     "static/js/787.0e84635d.chunk.js": "/dorf-tool/static/js/787.0e84635d.chunk.js",
     "index.html": "/dorf-tool/index.html",
     "main.c334655f.css.map": "/dorf-tool/static/css/main.c334655f.css.map",
-    "main.18e8c876.js.map": "/dorf-tool/static/js/main.18e8c876.js.map",
+    "main.9a69a436.js.map": "/dorf-tool/static/js/main.9a69a436.js.map",
     "787.0e84635d.chunk.js.map": "/dorf-tool/static/js/787.0e84635d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c334655f.css",
-    "static/js/main.18e8c876.js"
+    "static/js/main.9a69a436.js"
   ]
 }
