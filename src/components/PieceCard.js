@@ -29,7 +29,7 @@ const PieceCard = ({ className = "", piece, onRemove = null }) => {
               clipPath: `polygon(0% 0%, 50% 100%, 100% 0%)`,
             }}
           >
-            {/* {type} */}
+            {type}
           </div>
         ))}
       </div>
