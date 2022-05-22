@@ -69,6 +69,7 @@ const Tool = () => {
               className="bg-blue-grey-200 m-1"
               key={p + index}
               piece={p}
+              onRemove={removePiece}
             />
           ))}
         </div>
