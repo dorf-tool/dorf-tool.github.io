@@ -21,15 +21,15 @@ const PieceCard = ({ className = "", piece, onRemove = null }) => {
       <div className="w-24 h-20 relative flex justify-center ">
         {piece.split("").map((type, index) => (
           <div
-            className="absolute h-10 w-12 text-center text-white"
+            className="absolute h-10 w-12 text-center text-white bg-cover"
             style={{
+              backgroundImage:`url('${process.env.PUBLIC_URL}${type}.png')`,
               transformOrigin: "center bottom",
               transform: `rotate(calc(${60 * index}deg))`,
               clipPath: `polygon(0% 0%, 50% 100%, 100% 0%)`,
-              backgroundColor: TYPE_COLORS[type],
             }}
           >
-            {type}
+            {/* {type} */}
           </div>
         ))}
       </div>
