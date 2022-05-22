@@ -87,7 +87,7 @@ const Tool = () => {
           匹配地块
         </p>
         <div className="h-36 bg-blue-grey-300 p-2 rounded-md">
-          <PieceCard piece={piece} />
+          <PieceCard className="bg-blue-grey-200" piece={piece} />
         </div>
         <p className="text-lg font-sans font-semibold text-blue-grey-800">
           匹配结果

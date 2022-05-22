@@ -21,7 +21,7 @@ const PieceCard = ({ className = "", piece, onRemove = null }) => {
       <div className="w-24 h-20 relative flex justify-center ">
         {piece.split("").map((type, index) => (
           <div
-            className="absolute h-10 w-12 text-center text-blue-grey-800"
+            className="absolute h-10 w-12 text-center text-white"
             style={{
               transformOrigin: "center bottom",
               transform: `rotate(calc(${60 * index}deg))`,
