@@ -4,6 +4,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import PieceCard from "./PieceCard";
 import PieceInput from "./PieceInput";
 import { TYPE_REG_STRS } from "../constants";
+import classNames from "classnames";
 
 const Tool = () => {
   const [pieces, setPieces] = useState(
@@ -66,7 +67,11 @@ const Tool = () => {
           )}
           {pieces.map((p, index) => (
             <PieceCard
-              className="bg-blue-grey-200 m-1"
+              className={classNames(
+                piece&&pieces.filter((p) => comparePiece(p, piece)).includes(p) &&
+                  "border-2 border-red-500 border-solid",
+                "bg-blue-grey-200 m-1"
+              )}
               key={p + index}
               piece={p}
               onRemove={removePiece}
