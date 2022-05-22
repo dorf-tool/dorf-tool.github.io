@@ -2,7 +2,6 @@
   "name": "dorf-tool",
   "version": "0.1.0",
   "private": true,
-  "homepage": "dorf-tool",
   "dependencies": {
     "@babel/core": "^7.16.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
