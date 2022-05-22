@@ -89,7 +89,6 @@ const Tool = () => {
         </p>
         <PieceInput
           onFinish={setPiece}
-          hasNull={false}
           className="flex-shrink-0 bg-blue-grey-300 p-2 rounded-md"
           buttonClassName="bg-blue-grey-200 text-blue-grey-800"
         />
