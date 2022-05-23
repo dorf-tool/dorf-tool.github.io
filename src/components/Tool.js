@@ -74,7 +74,7 @@ const Tool = () => {
                 piece &&
                   pieces.filter((p) => comparePiece(p, piece)).includes(p) &&
                   "border-2 border-red-500 border-solid",
-                "bg-blue-grey-200 m-1"
+                "bg-blue-grey-200 mr-1 mb-1"
               )}
               key={p + index}
               piece={p}
@@ -95,8 +95,8 @@ const Tool = () => {
         <p className="text-lg font-sans font-semibold text-blue-grey-800">
           匹配地块
         </p>
-        <div className="h-36 bg-blue-grey-300 p-2 rounded-md flex justify-around items-center">
-          <PieceCard className="bg-blue-grey-200" piece={piece} />
+        <div className="h-36 bg-blue-grey-300 p-2 rounded-md flex  items-center">
+          <PieceCard className="bg-blue-grey-200 mr-2" piece={piece} />
           {piece && (
             <button
               className="h-content bg-blue-grey-200 text-blue-grey-800 col-span-1 rounded p-2"
@@ -109,13 +109,13 @@ const Tool = () => {
         <p className="text-lg font-sans font-semibold text-blue-grey-800">
           匹配结果
         </p>
-        <div className="flex-auto w-full flex flex-wrap content-start justify-center md:overflow-auto bg-blue-grey-300 p-2 rounded-md">
+        <div className="flex-auto w-full flex flex-wrap content-start  md:overflow-auto bg-blue-grey-300 p-2 rounded-md">
           {piece &&
             pieces
               .filter((p) => comparePiece(p, piece))
               .map((p, index) => (
                 <PieceCard
-                  className="bg-blue-grey-200 m-1"
+                  className="bg-blue-grey-200 mr-1 mb-1"
                   key={p + index}
                   piece={p}
                   onRemove={removePiece}
