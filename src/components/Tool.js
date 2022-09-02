@@ -5,7 +5,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import PieceCard from "./PieceCard";
 import PieceInput from "./PieceInput";
 import Button from "./Button";
-import { TYPE_REG_STRS } from "../constants";
+import { TYPE_REG_STR } from "../constants";
 
 import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
@@ -15,6 +15,26 @@ const requirePiecesAtom = atomWithStorage("pieces", []);
 // 待匹配地块
 const matchPieceAtom = atomWithStorage("matchPieceAtom", "");
 
+const Layout = ({ children, ...props }) => {
+  return (
+    <div
+      className="grid grid-cols-1 md:grid-cols-2 md:gap-2 absolute inset-0 h-screen w-screen nm-flat-blue-grey-100"
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+const LayoutColumn = ({ children, ...props }) => {
+  return (
+    <div
+      className="col-span-1 flex flex-col overflow-auto md:overflow-hidden p-2"
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
 const Title = ({ children, ...props }) => {
   return (
     <div
@@ -23,6 +43,32 @@ const Title = ({ children, ...props }) => {
     >
       {children}
     </div>
+  );
+};
+const PiecesBox = ({ children, ...props }) => {
+  return (
+    <div
+      className="flex-auto w-full grid md:overflow-auto nm-flat-blue-grey-100 p-2 rounded-md relative gap-2 md:gap-3 xl:gap-4 "
+      style={{
+        gridTemplateColumns: "repeat(auto-fill,minmax(min(7rem,100%),1fr)",
+        gridTemplateRows: "repeat(auto-fill,8rem)",
+      }}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};
+
+const GhButton = () => {
+  return (
+    <iframe
+      className="fixed bottom-4 right-4 w-40 h-8"
+      title="GitHub"
+      src="https://ghbtns.com/github-btn.html?user=dorftool&repo=dorftool.github.io&type=star&count=true&size=large&v=2"
+      frameBorder="0"
+      scrolling="0"
+    ></iframe>
   );
 };
 
@@ -61,7 +107,7 @@ const Tool = () => {
     const aStr = a + a;
     const bRegStr = b
       .split("")
-      .map((c) => TYPE_REG_STRS[c])
+      .map((c) => TYPE_REG_STR[c])
       .join("");
     const bReg = new RegExp(bRegStr);
     const result = aStr.match(bReg);
@@ -69,18 +115,20 @@ const Tool = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 md:gap-2 absolute inset-0 h-screen w-screen p-2 nm-flat-blue-grey-100 ">
+    <Layout>
       {/* 左 */}
-      <div className="col-span-1 flex flex-col overflow-auto md:overflow-hidden rounded-lg p-2">
+      <LayoutColumn>
         <Title>输入当前需求地块</Title>
         <PieceInput onFinish={addPiece} />
         <Title>需求地块</Title>
-        <div className="flex-auto w-full flex flex-wrap content-start justify-center md:overflow-auto nm-flat-blue-grey-100 p-2 rounded-md relative gap-3">
+        {/* <div className="flex-auto w-full flex flex-wrap content-start justify-center md:overflow-auto nm-flat-blue-grey-100 p-2 rounded-md relative gap-3"> */}
+        <PiecesBox>
           {requirePieces.length > 0 && (
             <FontAwesomeIcon
               className="absolute top-1 right-1 text-red-400 cursor-pointer text-lg z-10"
               onClick={clearPieces}
               icon={faTrashCan}
+              title="清空需求地块"
             />
           )}
           {requirePieces.map((p, index) => (
@@ -96,14 +144,14 @@ const Tool = () => {
               onRemove={removePiece}
             />
           ))}
-        </div>
-      </div>
+        </PiecesBox>
+      </LayoutColumn>
       {/* 右 */}
-      <div className="col-span-1 flex flex-col overflow-auto md:overflow-hidden rounded-lg p-2">
+      <LayoutColumn>
         <Title>输入匹配地块</Title>
         <PieceInput onFinish={setMatchPiece} />
         <Title>匹配地块</Title>
-        <div className="h-36 nm-flat-blue-grey-100 p-2 rounded-md flex  items-center">
+        <div className="h-36 nm-flat-blue-grey-100 p-2 gap-4 rounded-md flex items-center">
           {matchPiece && (
             <>
               <PieceCard piece={matchPiece} />
@@ -112,23 +160,17 @@ const Tool = () => {
           )}
         </div>
         <Title>匹配结果</Title>
-        <div className="flex-auto w-full flex flex-wrap content-start md:overflow-auto nm-flat-blue-grey-100 p-2 rounded-md gap-3">
+        <PiecesBox>
           {matchPiece &&
             requirePieces
               .filter((p) => comparePiece(p, matchPiece))
               .map((p, index) => (
                 <PieceCard key={p + index} piece={p} onRemove={removePiece} />
               ))}
-        </div>
-      </div>
-      <iframe
-        className="fixed bottom-4 right-4 w-40 h-8"
-        title="GitHub"
-        src="https://ghbtns.com/github-btn.html?user=dorftool&repo=dorftool.github.io&type=star&count=true&size=large&v=2"
-        frameBorder="0"
-        scrolling="0"
-      ></iframe>
-    </div>
+        </PiecesBox>
+      </LayoutColumn>
+      <GhButton />
+    </Layout>
   );
 };
 export default Tool;

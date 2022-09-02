@@ -7,8 +7,8 @@ const PieceCard = ({ piece, onRemove = null, matched = false }) => {
   return (
     <div
       className={classNames(
-        "nm-flat-blue-grey-100 mr-2 relative w-28 h-32 flex flex-wrap p-1 justify-center items-center rounded",
-        matched && "border-2 border-red-500 border-solid"
+        "col-span-1 nm-flat-blue-grey-100 relative w-28 h-32 flex flex-wrap p-1 justify-center items-center rounded",
+        matched && "border-2 border-red-500 border-solid border-opacity-50"
       )}
     >
       {onRemove && (
@@ -16,6 +16,7 @@ const PieceCard = ({ piece, onRemove = null, matched = false }) => {
           className="absolute top-1 right-1 text-red-400 cursor-pointer text-lg z-10"
           onClick={() => onRemove(piece)}
           icon={faCircleCheck}
+          title="已匹配"
         />
       )}
       <div className="w-24 h-20 relative flex justify-center ">

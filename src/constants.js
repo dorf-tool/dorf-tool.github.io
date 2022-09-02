@@ -1,5 +1,5 @@
-const TYPES = ["草", "树", "村", "田", "铁", "河", "湖", "空"];
-const TYPE_COLORS = {
+export const TYPES = ["草", "树", "村", "田", "铁", "河", "湖", "空"];
+export const TYPE_COLORS = {
   草: "#fff",
   树: "#fff",
   村: "#fff",
@@ -9,7 +9,7 @@ const TYPE_COLORS = {
   湖: "#fff",
   空: "#333",
 };
-const TYPE_REG_STRS = {
+export const TYPE_REG_STR = {
   草: "[草空湖]",
   树: "[树空]",
   村: "[村空]",
@@ -19,6 +19,4 @@ const TYPE_REG_STRS = {
   湖: "[湖空草河]",
   空: "[草树村田铁河湖空]",
 };
-const PIECE_LENGTH = 6;
-
-export { TYPES, TYPE_COLORS, TYPE_REG_STRS, PIECE_LENGTH };
+export const PIECE_LENGTH = 6;
