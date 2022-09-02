@@ -2,12 +2,8 @@ import { useState, useEffect } from "react";
 import classNames from "classnames";
 import PieceCard from "./PieceCard";
 import { PIECE_LENGTH, TYPES } from "../constants";
-const PieceInput = ({
-  className = "",
-  buttonClassName = "",
-  defaultPiece = "",
-  onFinish = () => null,
-}) => {
+import Button from "./Button";
+const PieceInput = ({ defaultPiece = "", onFinish = () => null }) => {
   const [piece, setPiece] = useState(defaultPiece);
   const deleteLast = () => {
     setPiece(piece.slice(0, -1));
@@ -26,18 +22,17 @@ const PieceInput = ({
     setPiece(defaultPiece);
   };
   return (
-    <div className={classNames(className, "h-36 grid grid-cols-6 gap-2")}>
+    <div className="flex-shrink-0 nm-flat-blue-grey-100 p-2 rounded-md h-36 grid grid-cols-6 gap-2">
       <div className="col-span-3 grid grid-cols-4 gap-2">
         {TYPES.map((type) => {
           return (
-            <button
-              className={classNames(buttonClassName, "col-span-1 rounded")}
+            <Button
               key={type}
               onClick={() => setPiece(piece + type)}
               disabled={piece.length >= PIECE_LENGTH}
             >
               {type}
-            </button>
+            </Button>
           );
         })}
       </div>
@@ -45,18 +40,10 @@ const PieceInput = ({
         <PieceCard piece={piece} />
       </div>
       <div className="grid grid-cols-1 gap-2">
-        <button
-          className={classNames(buttonClassName, "col-span-1 rounded bg-red-300")}
-          onClick={deleteLast}
-        >
+        <Button onClick={deleteLast} danger>
           移除
-        </button>
-        <button
-          className={classNames(buttonClassName, "col-span-1 rounded")}
-          onClick={finish}
-        >
-          完成
-        </button>
+        </Button>
+        <Button onClick={finish}>完成</Button>
       </div>
     </div>
   );
