@@ -123,6 +123,13 @@ const Tool = () => {
               ))}
         </div>
       </div>
+      <iframe
+        className="fixed bottom-4 right-4 w-40 h-8"
+        title="GitHub"
+        src="https://ghbtns.com/github-btn.html?user=dorftool&repo=dorftool.github.io&type=star&count=true&size=large&v=2"
+        frameBorder="0"
+        scrolling="0"
+      ></iframe>
     </div>
   );
 };
