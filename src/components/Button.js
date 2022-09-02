@@ -1,8 +1,14 @@
+import classNames from "classnames";
 import React from "react";
-const Button = ({ children, type = "normal", ...props }) => {
+const Button = ({ children, danger = false, ...props }) => {
   return (
     <button
-      className="nm-flat-blue-grey-100 focus:nm-concave-blue-grey-100 text-blue-grey-800 col-span-1"
+      className={classNames(
+        "col-span-1 text-blue-grey-800 p-2 rounded",
+        danger
+          ? "nm-flat-red-100 focus:nm-concave-red-100"
+          : "nm-flat-blue-grey-100 focus:nm-concave-blue-grey-100"
+      )}
       {...props}
     >
       {children}

@@ -7,7 +7,7 @@ const TYPE_COLORS = {
   铁: "#fff",
   河: "#fff",
   湖: "#fff",
-  空: "#black",
+  空: "#333",
 };
 const TYPE_REG_STRS = {
   草: "[草空湖]",

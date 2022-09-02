@@ -40,7 +40,9 @@ const PieceInput = ({ defaultPiece = "", onFinish = () => null }) => {
         <PieceCard piece={piece} />
       </div>
       <div className="grid grid-cols-1 gap-2">
-        <Button onClick={deleteLast}>移除</Button>
+        <Button onClick={deleteLast} danger>
+          移除
+        </Button>
         <Button onClick={finish}>完成</Button>
       </div>
     </div>

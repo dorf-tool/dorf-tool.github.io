@@ -67,12 +67,10 @@ const Tool = () => {
           )}
           {pieces.map((p, index) => (
             <PieceCard
-              className={classNames(
+              matched={
                 piece &&
-                  pieces.filter((p) => comparePiece(p, piece)).includes(p) &&
-                  "border-2 border-red-500 border-solid",
-                "nm-flat-blue-grey-100 mr-1 mb-1"
-              )}
+                pieces.filter((p) => comparePiece(p, piece)).includes(p)
+              }
               key={p + index}
               piece={p}
               onRemove={removePiece}
@@ -101,12 +99,7 @@ const Tool = () => {
             pieces
               .filter((p) => comparePiece(p, piece))
               .map((p, index) => (
-                <PieceCard
-                  className="nm-flat-blue-grey-100 mr-1 mb-1"
-                  key={p + index}
-                  piece={p}
-                  onRemove={removePiece}
-                />
+                <PieceCard key={p + index} piece={p} onRemove={removePiece} />
               ))}
         </div>
       </div>
