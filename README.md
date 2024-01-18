@@ -1,5 +1,5 @@
 # 筑梦颂工具
-Tool for Dorf romantik
+Tool for Dorfromantik
 
 [dorftool.github.io](https://dorftool.github.io)
 
